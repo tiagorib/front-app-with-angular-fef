@@ -55,7 +55,25 @@
 
                 <ng-container matColumnDef="statusCustomer">
                     <th mat-header-cell *matHeaderCellDef> Status </th>
-                    <td mat-cell *matCellDef="let customer"> {{ customer.statusCustomer }} </td>
+                    <td mat-cell *matCellDef="let customer"><mat-icon> {{ customer.statusCustomer ?  'done_all' : 'remove_done'}} </mat-icon></td>
+                </ng-container>
+
+                <ng-container matColumnDef="deleteCustomer">
+                    <th mat-header-cell *matHeaderCellDef> Excluir </th>
+                    <td mat-cell *matCellDef="let customer">
+                        <a href="#" (click)="deleteCustomer(customer)">
+                            <mat-icon>delete-forever</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="findCustomer">
+                    <th mat-header-cell *matHeaderCellDef> Alterar </th>
+                    <td mat-cell *matCellDef="let customer">
+                        <a href="#" (click)="findCustomer(customer)">
+                            <mat-icon>mode_edit</mat-icon>
+                        </a>
+                    </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -90,7 +108,7 @@
                 </mat-form-field>
                 <mat-form-field class="full-width">
                     <mat-label>Data de Nascimento: </mat-label>
-                    <input type="date" matInput placeholder="Digite sua data de nascimento"
+                    <input type="text" matInput placeholder="Digite sua data de nascimento"
                         [(ngModel)]="customer.birthdateCustomer" name="birthdateCustomer" required />
                 </mat-form-field>
                 <mat-form-field class="full-width">
