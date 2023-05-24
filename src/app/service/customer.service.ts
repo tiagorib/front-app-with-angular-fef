@@ -21,4 +21,12 @@ export class CustomerService {
     return this.http.get<Customer[]>(this.url+'/customer/list');    
   }
 
+  delete(idCustomer: any): Observable<Customer> {
+    return this.http.delete<Customer>(`${this.url}/customer/delete/${idCustomer}`);
+  }
+
+  findById(idCustomer: any): Observable<Customer> {
+    return this.http.get<any>(`${this.url}/customer/findCustomer/${idCustomer}`);
+  }
+
 }

@@ -13,8 +13,9 @@ import { MatPaginator } from '@angular/material/paginator';
 export class CustomerComponent {
 
 
-  displayedColumns: string[] = ['idCustomer', 'firstNameCustomer', 'lastNameCustomer', 'cpfCustomer', 'birthdateCustomer', 'dateCreatedCustomer', 'monthlyIncomeCustomer', 'emailCustomer', 'statusCustomer'];
+  displayedColumns: string[] = ['idCustomer', 'firstNameCustomer', 'lastNameCustomer', 'cpfCustomer', 'birthdateCustomer', 'dateCreatedCustomer', 'monthlyIncomeCustomer', 'emailCustomer', 'statusCustomer', 'deleteCustomer', 'findCustomer'];
   ELEMENT_DATA: Customer[] = [];
+  message: string = '';
   dataSource = new MatTableDataSource<Customer>(this.ELEMENT_DATA);
   success: boolean = false;
   errors!: String[];
@@ -68,6 +69,22 @@ export class CustomerComponent {
       this.ELEMENT_DATA = response.result as Customer[];
       this.dataSource = new MatTableDataSource<Customer>(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  deleteCustomer(customer: Customer) {
+    if (window.confirm('Deseja realmente excluir este cliente?')) {
+      this.service.delete(customer.idCustomer).subscribe((response: any) => {
+        this.message = response.result.result as string;
+        window.alert(this.message);
+        this.listCustomer();
+      });
+    }
+  }
+
+  findCustomer(customer: Customer) {    
+    this.service.findById(customer.idCustomer).subscribe((response: any) => {
+      this.customer = response.result as Customer;
     });
   }
 
