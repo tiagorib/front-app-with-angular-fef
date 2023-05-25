@@ -42,26 +42,19 @@ export class CustomerComponent {
     statusCustomer: true
   }
 
-  saveCustomer() {
+  saveCustomer() {    
     const datePipe = new DatePipe('en-US');
-    this.customer.birthdateCustomer = datePipe.transform(
-      this.customer.birthdateCustomer, 'dd/MM/yyyy');
+    this.customer.birthdateCustomer = datePipe.transform(this.customer.birthdateCustomer, 'dd/MM/yyyy');
     
-    this.service.save(this.customer).subscribe({next: response => {
+    this.service.save(this.customer).subscribe((response: any) => {
       this.success = true;
-      this.errors = []; 
+      this.errors = [];
+      this.customer = response.result as Customer;       
+      var date = this.customer.birthdateCustomer;
+      var newDate = date.split("/").reverse().join("-");
+      this.customer.birthdateCustomer = newDate; 
       this.listCustomer();   
-    }, error: ex => {
-      if (ex.error.errors) {
-        this.errors = ex.error.errors;
-        this.success = false;
-        ex.error.errors.forEach((element:any) => {         
-        });
-      } else {
-          this.success = false;
-          this.errors = ex.error.errors;        
-      }
-    }})
+    });
   }
 
   listCustomer() {
@@ -84,7 +77,11 @@ export class CustomerComponent {
 
   findCustomer(customer: Customer) {    
     this.service.findById(customer.idCustomer).subscribe((response: any) => {
-      this.customer = response.result as Customer;
+      this.customer = response.result as Customer; 
+      const datePipe = new DatePipe('en-US');
+      var date = this.customer.birthdateCustomer;
+      var newDate = date.split("/").reverse().join("-");
+      this.customer.birthdateCustomer = newDate;
     });
   }
 
