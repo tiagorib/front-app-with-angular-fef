@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Product } from '../model/product';
 import { API_CONFIG } from '../config/api_config';
+import { Category } from '../model/category';
 
 @Injectable()
 export class ProductService {
@@ -16,6 +17,10 @@ export class ProductService {
 
   list() : Observable<Product[]>{
   return this.http.get<Product[]>(this.url+'/product/list');
+}
+
+  listCategory() : Observable<Category[]>{
+  return this.http.get<Category[]>(this.url+'/category/list');
 }
 
   delete(idProduct:any) : Observable<Product[]>{

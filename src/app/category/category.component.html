@@ -19,12 +19,12 @@
                 </ng-container>
 
                 <ng-container matColumnDef="nameCategory">
-                    <th mat-header-cell *matHeaderCellDef> Primeiro Nome </th>
+                    <th mat-header-cell *matHeaderCellDef> Nome da Categoria </th>
                     <td mat-cell *matCellDef="let category"> {{ category.nameCategory }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="descriptionCategory">
-                    <th mat-header-cell *matHeaderCellDef> Último Nome </th>
+                    <th mat-header-cell *matHeaderCellDef> Descrição </th>
                     <td mat-cell *matCellDef="let category"> {{ category.descriptionCategory }} </td>
                 </ng-container>
 
@@ -74,7 +74,7 @@
                 <button (click)="saveCategory();" mat-raised-button color="primary">Salvar</button>
                 <br />
                 <div role="alert" *ngIf="success == true">
-                    <span>Categoria {{ category.nameCategory }} salvo com sucesso!</span>
+                    <span>Cliente {{ category.nameCategory }} salvo com sucesso!</span>
                 </div>
                 <div role="alert" *ngFor="let error of errors">
                     <span>{{ error }}</span>

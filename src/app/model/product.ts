@@ -10,6 +10,6 @@ export interface Product{
     amountProduct: string;
     dateCreatedProduct: any;
     publishedProduct: boolean;
-    
+    idCategory?: any;
 }
 

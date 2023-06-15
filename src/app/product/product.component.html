@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <span>
         <mat-icon>account_circle</mat-icon>
-        Clientes
+        Produtos
     </span>
 </mat-toolbar>
 <br />
@@ -29,6 +29,11 @@
                     <td mat-cell *matCellDef="let product"> {{ product.descriptionProduct }} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="categoryId">
+                    <th mat-header-cell *matHeaderCellDef> Categoria </th>
+                    <td mat-cell *matCellDef="let product"> {{ product.category.nameCategory }} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="skuProduct">
                     <th mat-header-cell *matHeaderCellDef> SKU  </th>
                     <td mat-cell *matCellDef="let product"> {{ product.skuProduct }} </td>
@@ -49,12 +54,17 @@
                     <td mat-cell *matCellDef="let product"> {{ product.amountProduct }} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="dateCreatedProduct">
+                    <th mat-header-cell *matHeaderCellDef> Data de Cadastro </th>
+                    <td mat-cell *matCellDef="let product"> {{ product.dateCreatedProduct }} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="publishedProduct">
                     <th mat-header-cell *matHeaderCellDef> Status </th>
                     <td mat-cell *matCellDef="let product"> 
                         <mat-icon> {{ product.publishedProduct ?  'done_all' : 'remove_done'}} </mat-icon> 
                 </td>
-                        
+
                 </ng-container>
 
                 <ng-container matColumnDef="deleteProduct">
@@ -106,6 +116,16 @@
                 <input type="text" [(ngModel)]="product.descriptionProduct" name="descriptionProduct" required matInput
                     placeholder="Digite a descrição do produto" />
             </mat-form-field>
+
+            <p>Selecione a categoria:</p>
+            <select ng-model="idCategory"></select>
+
+            <mat-form-field class="full-width">
+                <mat-label>Data de Nascimento: </mat-label>
+                <input type="date" matInput placeholder="Digite a data de criação"
+                    [(ngModel)]="product.dateCreatedProduct" name="dateCreatedProduct" required />
+            </mat-form-field>
+            
             <mat-form-field class="full-width">
                 <mat-label>SKU: </mat-label>
                 <input type="text" [(ngModel)]="product.skuProduct" name="skuProduct" required matInput

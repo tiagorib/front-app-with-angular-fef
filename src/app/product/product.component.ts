@@ -4,6 +4,8 @@ import { ProductService } from '../service/product.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Category } from '../model/category';
+import { DatePipe } from '@angular/common';
+import { CategoryService } from '../service/category.service';
 
 @Component({
   selector: 'app-product',
@@ -14,10 +16,12 @@ import { Category } from '../model/category';
 
 export class ProductComponent implements OnInit{
   
-  displayedColumns: string[] = ['idProduct', 'nameProduct', 'descriptionProduct', 'skuProduct', 'eanProduct', 'costPriceProduct', 'amountProduct', 'publishedProduct','deleteProduct','findProduct'];
+  displayedColumns: string[] = ['idProduct', 'nameProduct', 'descriptionProduct','categoryId', 'skuProduct', 'eanProduct', 'costPriceProduct', 'amountProduct','dateCreatedProduct', 'publishedProduct','deleteProduct','findProduct'];
   ELEMENT_DATA: Product[] = [];
+  ELEMENT_DATA_CATEGORY: Category[] = [];
   message: string = '';
   dataSource = new MatTableDataSource<Product>(this.ELEMENT_DATA);
+
   success: boolean = false;
   errors!: String[];
   
@@ -34,7 +38,8 @@ export class ProductComponent implements OnInit{
   costPriceProduct: '',
   amountProduct: '',
   publishedProduct: false,
-  dateCreatedProduct: ''
+  dateCreatedProduct: '',
+  idCategory: 3
   }
   constructor(private productService:ProductService){
     
@@ -44,6 +49,8 @@ export class ProductComponent implements OnInit{
   }
 
   public saveProduct(){
+    const datePipe = new DatePipe('en-US');
+    this.product.dateCreatedProduct = datePipe.transform(this.product.dateCreatedProduct, 'dd/MM/yyyy');
     if (this.product.idProduct== ""){
     this.productService.save(this.product).subscribe({next: response =>{
       this.success = true;
@@ -87,6 +94,12 @@ export class ProductComponent implements OnInit{
     });
   }
 
+  listCategory() {
+    this.productService.listCategory().subscribe((response: any) => {
+      this.ELEMENT_DATA_CATEGORY = response.result as Category[];
+    });
+  }
+
   deleteProduct(product: Product) {
     if (window.confirm('Deseja realmente excluir este cliente?')) {
       this.productService.delete(product.idProduct).subscribe((response: any) => {
@@ -100,6 +113,10 @@ export class ProductComponent implements OnInit{
   findProduct(product: Product) {    
     this.productService.findById(product.idProduct).subscribe((response: any) => {
       this.product = response.result as Product;
+      const datePipe = new DatePipe('en-US');
+      var date = this.product.dateCreatedProduct;
+      var newDate = date.split("/").reverse().join("-");
+      this.product.dateCreatedProduct = newDate;
     });
   }
 
