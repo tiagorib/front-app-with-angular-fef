@@ -1,7 +1,7 @@
 <mat-toolbar>
     <span>
         <mat-icon>account_circle</mat-icon>
-        Clientes
+        Categorias
     </span>
 </mat-toolbar>
 <mat-tab-group #tabGroup="matTabGroup">
@@ -19,12 +19,12 @@
                 </ng-container>
 
                 <ng-container matColumnDef="nameCategory">
-                    <th mat-header-cell *matHeaderCellDef> Primeiro Nome </th>
+                    <th mat-header-cell *matHeaderCellDef> Nome da Categoria </th>
                     <td mat-cell *matCellDef="let category"> {{ category.nameCategory }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="descriptionCategory">
-                    <th mat-header-cell *matHeaderCellDef> Último Nome </th>
+                    <th mat-header-cell *matHeaderCellDef> Descrição </th>
                     <td mat-cell *matCellDef="let category"> {{ category.descriptionCategory }} </td>
                 </ng-container>
 
@@ -62,44 +62,19 @@
             <mat-card-title>Cadastro</mat-card-title>
             <form>
                 <mat-form-field class="full-width">
-                    <mat-label>Primeiro Nome: </mat-label>
-                    <input type="text" matInput placeholder="Digite seu primeiro nome"
-                        [(ngModel)]="category.firstNameCategory" name="firstNameCategory" required />
+                    <mat-label>Nome da Categoria: </mat-label>
+                    <input type="text" matInput placeholder="Nome da Categoria"
+                        [(ngModel)]="category.nameCategory" name="nameCategory" required />
                 </mat-form-field>
                 <mat-form-field class="full-width">
-                    <mat-label>Último Nome: </mat-label>
-                    <input type="text" matInput placeholder="Digite seu último nome"
-                        [(ngModel)]="category.lastNameCategory" name="lastNameCategory" required />
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <mat-label>CPF: </mat-label>
-                    <input type="text" matInput placeholder="Digite seu CPF" [(ngModel)]="category.cpfCategory"
-                        name="cpfCategory" required />
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <mat-label>Data de Nascimento: </mat-label>
-                    <input type="date" matInput placeholder="Digite sua data de nascimento"
-                        [(ngModel)]="category.birthdateCategory" name="birthdateCategory" required />
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <mat-label>Renda Mensal: R$ </mat-label>
-                    <input type="number" matInput placeholder="Digite sua renda mensal (R$)"
-                        [(ngModel)]="category.monthlyIncomeCategory" name="monthlyIncomeCategory" required />
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <mat-label>Email: </mat-label>
-                    <input type="email" matInput placeholder="Digite seu email" [(ngModel)]="category.emailCategory"
-                        name="emailCategory" required />
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <mat-label>Senha: </mat-label>
-                    <input type="password" matInput placeholder="Digite sua senha"
-                        [(ngModel)]="category.passwordCategory" name="passwordCategory" required />
+                    <mat-label>Descrição: </mat-label>
+                    <input type="text" matInput placeholder="Descrição"
+                        [(ngModel)]="category.descriptionCategory" name="descriptionCategory" required />
                 </mat-form-field>
                 <button (click)="saveCategory();" mat-raised-button color="primary">Salvar</button>
                 <br />
                 <div role="alert" *ngIf="success == true">
-                    <span>Cliente {{ category.firstNameCategory }} salvo com sucesso!</span>
+                    <span>Cliente {{ category.nameCategory }} salvo com sucesso!</span>
                 </div>
                 <div role="alert" *ngFor="let error of errors">
                     <span>{{ error }}</span>

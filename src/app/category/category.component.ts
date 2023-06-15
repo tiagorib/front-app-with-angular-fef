@@ -11,7 +11,7 @@ import { CategoryService } from '../service/category.service';
 })
 export class CategoryComponent {
 
-  displayedColumns: string[] = ['id_category', 'name_category', 'description_category', 'deleteCategory', 'findCategory'];
+  displayedColumns: string[] = ['idCategory', 'nameCategory', 'descriptionCategory', 'deleteCategory', 'findCategory'];
   ELEMENT_DATA: Category[] = [];
   message: string = '';
   dataSource = new MatTableDataSource<Category>(this.ELEMENT_DATA);
@@ -29,15 +29,15 @@ export class CategoryComponent {
 
   category: Category = {
     idCategory: '',
-    nameCategory:'' ,
-    descriptionCategory:'' ,
+    descriptionCategory : '',
+    nameCategory: ''
   }
 
   saveCategory() {    
     this.service.save(this.category).subscribe((response: any) => {
       this.success = true;
       this.errors = [];
-      this.category = response.result as Category;       
+      this.category = response.result as Category;
       this.listCategory();   
     });
   }
@@ -65,4 +65,5 @@ export class CategoryComponent {
       this.category = response.result as Category; 
     });
   }
+
 }

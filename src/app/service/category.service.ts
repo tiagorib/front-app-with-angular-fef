@@ -13,7 +13,7 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   save(category: Category) : Observable<Category[]> {
-    return this.http.post<Category[]>(this.url+'/category/insert', category);    
+    return this.http.post<Category[]>(this.url+'/category/create', category);    
   }
 
   list() : Observable<Category[]> {
