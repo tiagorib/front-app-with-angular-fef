@@ -22,9 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerService } from './service/customer.service';
 import { DatePipe } from '@angular/common';
-import { CategoryComponent } from './category/category.component';
+import { categoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
-import { CategoryService } from './service/category.service';
+import { categoryService } from './service/category.service';
 import { ProductService } from './service/product.service';
 import { HomeComponent } from './home/home.component';
 import { MenubarComponent } from './menubar/menubar.component';
@@ -33,7 +33,7 @@ import { MenubarComponent } from './menubar/menubar.component';
   declarations: [
     AppComponent,
     CustomerComponent,
-    CategoryComponent,
+    categoryComponent,
     ProductComponent,
     HomeComponent,
     MenubarComponent
@@ -60,7 +60,7 @@ import { MenubarComponent } from './menubar/menubar.component';
   ],
   providers: [
     CustomerService,
-    CategoryService,
+    categoryService,
     ProductService,
     DatePipe
   ],

@@ -1,1 +1,105 @@
-<p>category works!</p>
+<mat-toolbar style="background: rgb(0, 162, 255);">
+    <span >
+
+        <div style="display: flex; justify-content: center; align-items: center; color: white;">
+            <mat-icon>account_circle</mat-icon>
+            Clientes
+        </div>
+                
+    </span>
+</mat-toolbar>
+<mat-tab-group #tabGroup="matTabGroup">
+    <mat-tab >
+
+        <ng-template mat-tab-label>
+
+            <mat-icon>
+                list
+            </mat-icon>
+                todos
+        </ng-template>
+
+        <mat-card >
+
+            <table   mat-table [dataSource]="dataSource" class="full-width" matTableResponsive>
+
+                <ng-container matColumnDef="idcategory">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let category"> {{ category.idcategory }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="namecategory">
+                    <th mat-header-cell *matHeaderCellDef> Primeiro Nome </th>
+                    <td mat-cell *matCellDef="let category"> {{ category.namecategory }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="descriptionCategory">
+                    <th mat-header-cell *matHeaderCellDef> Último Nome </th>
+                    <td mat-cell *matCellDef="let category"> {{ category.descriptionCategory }} </td>
+                </ng-container>
+
+                
+                <ng-container matColumnDef="deletecategory">
+                    <th mat-header-cell *matHeaderCellDef> Excluir </th>
+                    <td mat-cell *matCellDef="let category">  
+                        <!--<button style="width: 20px; height: 30px; margin: 2px;" mat-raised-button color="primary">Alterar</button>-->
+                        <!--<button (click)="deletecategory(category)" style="width: 20px; height: 30px; margin: 2px;" mat-raised-button color="warn" extended> Excluir</button>-->
+                        <a href="#" style="color:red;" (click)="deletecategory(category)">
+                            <mat-icon >delete-forever</mat-icon>
+                           
+                        </a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="findcategory">
+                    <th mat-header-cell *matHeaderCellDef> Alterar </th>
+                    <td mat-cell *matCellDef="let category">
+                        <a href="#" (click)="tabGroup.selectedIndex=1;findcategory(category);">
+                            <mat-icon>mode_edit</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+              
+
+        </mat-card>
+
+    </mat-tab>
+    <mat-tab>
+
+        <ng-template mat-tab-label>
+
+            <mat-icon>
+                account_circle
+            </mat-icon>
+                novo
+        </ng-template>
+<mat-card >
+<mat-card-title>Cadastro</mat-card-title>
+<form>
+    <mat-form-field class="full-width">
+        <mat-label>Nome: </mat-label>
+        <input type="text"  [ngModelOptions]="{standalone: true}" matInput placeholder="Digite o nome da categoria"  [(ngModel)]="category.namecategory" name="namecategory" required/>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Descrição: </mat-label>
+        <input type="text" [(ngModel)]="category.descriptionCategory" [ngModelOptions]="{standalone: true}" matInput placeholder="Digite a descrição" required/>
+    </mat-form-field>
+   
+    <button (click)="savecategory()" type="submit" mat-raised-button color="primary">Salvar</button>
+    <br />
+    <div role="alert" *ngIf="success == true">
+        <span>Cliente {{ category.namecategory }} cadastrado com sucesso!</span>
+    </div>
+    <div role="alert" *ngFor="let error of errors">
+        <span>{{ error }}</span>
+    </div>
+</form>
+</mat-card>
+</mat-tab>
+</mat-tab-group>
